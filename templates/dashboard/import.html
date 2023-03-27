@@ -1,0 +1,231 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title"> FILE </h3>
+        <nav aria-label="breadcrumb">
+         
+        </nav>
+      </div>
+  <div class="row">
+    <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+
+
+
+
+  <form method="GET" enctype="multipart/form-data"> 
+{% comment %}     
+   
+    <div class="container mt-5">
+  
+        <p><h1 align="center">Page d'entrée de poste</h1></p>
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-4"><h2>Position <b>Details</b></h2></div>
+                    <div class="col-sm-8">
+                    <a href="{% url 'file' id=idd %}" type="button" class="btn btn-info">
+                            <i class="fa fa-file-excel-o"></i> data
+                        </a>
+                       
+                        <a href="{% url 'conditin' id=idd %}" type="button" class="btn btn-info"> 
+                            <i class="fa fa-file-excel-o"></i> Ajouter  condition
+                        </a>
+ <a href="" type="button" class="btn btn-info"> 
+                            <i class="fa fa-file-excel-o"></i> les condition
+                        </a>
+                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> 
+                            fichier updaite</button>
+                    
+                      
+                       
+                    </div>
+                    <div class='btn btn-info' id="displaymessage" style="display:none;width:100%;margin-top:10px;"></div>
+                </div>
+            </div> {% endcomment %}
+            <div class="row">
+                <div class="col-12 grid-margin">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Recent Tickets</h4>
+                      <div class="table-responsive">
+                        <table class="table">
+                <thead>
+                    
+                    <tr>
+         <th>               article</th>
+                     <th>   designation_article</th>
+              <th>          text_article</th>
+            <th>            grpe_march</th>
+     <th>                   div</th>
+       <th>                 ctrpr</th>
+         <th>               typ_app</th>
+     <th>                   a_s</th>
+     <th>                   tcy</th>
+     <th>                   dfi</th>
+     <th>                   dpr</th>
+       <th>                 horiz</th>
+    <th>                    mp</th>
+   <th>                     r</th>
+      <th>                  tyar</th>
+     <th>                   nal</th>
+     <th>                   i_c</th>
+           <th>             aappr_def</th>
+       <th>                 mgapp</th>
+     <th>                   mag</th>
+    <th>                    tl</th>
+          <th>              lot_fixe</th>
+     <th>                   uq1</th>
+                <th>        stock_securite</th>
+     <th>                   uq0</th>
+                       
+     <th>                   tre</th>
+      <th>                  gest</th>
+    <th>                    di</th> 
+       <th>                 rebut</th>
+     <th>                   gac</th>
+        <th>                Profil</th>
+        <th>                prpiAt</th>
+          <th>              cree_par</th>
+        <th>                langue</th>
+         <th>               Cree_le</th>
+      <th>                  gcha</th>
+      <th>   gs</th>
+                        <th>  mode_de_comparaison_des_besoin</th>
+                 <th>       int_ajust_amont</th>
+                <th>        int_ajust_aval</th>
+              <th>          taille_l_min</th>
+     <th>                   uq2</th>
+              <th>          val_arrondie</th>
+     <th>                   uq3</th>
+               <th>         taille_lot_mx</th>
+     <th>                   uq4</th>
+               <th>         stock_maximum</th>
+     <th>                   uq5</th>
+       <th>                 chant</th>
+     <th>                   typ</th>
+           <th>             delai_sec</th>
+            <th>            delai_sec1</th>
+                   <th>     ctrl_destinataire</th>
+               <th>         article_rempl</th>
+    <th>                    dv</th>
+     <th>                   gml</th>
+      <th>                  grpl</th>
+     <th>                   abc</th>
+     <th>                   uq6</th>
+              <th>          element_dOTP</th>
+      <th>                  grpa</th>
+               <th>         Code_pilotage</th>
+                   <th>     hierarch_produits</th>
+            <th>            poids_brut</th>
+      <th>                  unp1</th>
+           <th>             poids_net</th>
+      <th>                  unp2</th>
+            <th>            pas_de_ccr</th>
+                      <th>  Taille_de_lot_du_CCR</th>
+     <th>                   uq7</th>
+                        
+                    
+                    </tr>
+                </thead>
+                {% for x in data %}  
+                <tbody> 
+                   
+                    
+                    <td>               {{x.article}}</td>
+                    <td>   {{x.designation_article}}</td>
+             <td>        {{ x.text_article}}</td>
+           <td>            {{x.grpe_march}}</td>
+    <td>                   {{x.div}}</td>
+      <td>                 {{x.ctrpr}}</td>
+        <td>               {{x.typ_app}}</td>
+    <td>                   {{x.a_s}}</td>
+    <td>                   {{x.tcy}}</td>
+    <td>                   {{x.dfi}}</td>
+    <td>                   {{x.dpr}}</td>
+      <td>                 {{x.horiz}}</td>
+   <td>                    {{x.mp}}</td>
+  <td>                     {{x.r}}</td>
+     <td>                  {{x.tyar}}</td>
+    <td>                   {{x.nal}}</td>
+    <td>                   {{x.i_c}}</td>
+          <td>             {{x.aappr_def}}</td>
+      <td>                 {{x.mgapp}}</td>
+    <td>                   {{x.mag}}</td>
+   <td>                    {{x.tl}}</td>
+         <td>              {{x.lot_fixe}}</td>
+    <td>                   {{x.uq1}}</td>
+               <td>        {{x.stock_securite}}</td>
+    <td>                   {{x.uq0}}</td>
+                      
+    <td>                   {{x.tre}}</td>
+     <td>                  {{x.gest}}</td>
+   <td>                    {{x.di}}</td> 
+      <td>                 {{x.rebut}}</td>
+    <td>                   {{x.gac}}</td>
+       <td>                {{x.Profil}}</td>
+       <td>                {{x.prpiAt}}</td>
+         <td>             {{ x.cree_par}}</td>
+       <td>               {{ x.langue}}</td>
+        <td>               {{x.Cree_le}}</td>
+     <td>                  {{x.gcha}}</td>
+                  <td>   {{x.gs}}</td>
+                       <td> {{ x.mode_de_comparaison_des_besoin}}</td>
+                <td>      {{ x.int_ajust_amont}}</td>
+               <td>        {{x.int_ajust_aval}}</td>
+             <td>          {{x.taille_l_min}}</td>
+    <td>                   {{x.uq2}}</td>
+             <td>          {{x.val_arrondie}}</td>
+    <td>                   {{x.uq3}}</td>
+              <td>         {{x.taille_lot_mx}}</td>
+    <td>                   {{x.uq4}}</td>
+              <td>         {{x.stock_maximum}}</td>
+    <td>                   {{x.uq5}}</td>
+      <td>                 {{x.chant}}</td>
+    <td>                  {{ x.typ}}</td>
+          <td>            {{ x.delai_sec}}</td>
+           <td>            {{x.delai_sec1}}</td>
+                  <td>    {{ x.ctrl_destinataire}}</td>
+              <td>         {{x.article_rempl}}</td>
+   <td>                   {{ x.dv}}</td>
+    <td>                   {{x.gml}}</td>
+     <td>                  {{x.grpl}}</td>
+    <td>                   {{x.abc}}</td>
+    <td>                   {{x.uq6}}</td>
+             <td>          {{x.element_dOTP}}</td>
+     <td>                {{  x.grpa}}</td>
+              <td>        {{ x.Code_pilotage}}</td>
+                  <td>     {{x.hierarch_produits}}</td>
+           <td>           {{ x.poids_brut}}</td>
+     <td>                 {{ x.unp1}}</td>
+          <td>             {{x.poids_net}}</td>
+     <td>                  {{x.unp2}}</td>
+           <td>            {{x.pas_de_ccr}}</td>
+                     <td> {{ x.Taille_de_lot_du_CCR}}</td>
+    <td>                   {{x.uq7}}</td>
+                       
+                   
+
+
+                    {% comment %} <td class="btn btn-outline-danger btn-icon-text">yghj</td>
+                    <td >yghj</td><td class=" btn-outline-danger">yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td>
+               {% endcomment %}  </tbody>
+                {%endfor%}
+            </table>
+        
+        </div>
+    </div>     
+</form>
+
+  
+</div>
+</div>       </div>
+</div>       </div>
+</div>  
+{% endblock %}

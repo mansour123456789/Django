@@ -1,0 +1,120 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Modal -->
+
+
+
+
+<div class="main-panel">
+  <div class="content-wrapper" >
+   
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+     
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="">Upload xlsx</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% block jj %}
+        <form method="post" enctype="multipart/form-data"> 
+            {% csrf_token %}
+           
+
+            <div class="modal-body" style="background-color: beige;">
+                <label>Upload a file </lable> 
+                    <br>
+                    <br>
+                    
+          
+          
+         
+                    <input type="file" name="my_file"> <br>
+                    <p><a href={% url 'filee' %}>aa</a>Only accepts xlsx file </p>
+                    <p>xlsx Formpat : </p>
+                    <span>color, name, age</span> <br>
+                    <span>UI/UX, NYC Some Address 123, 3 weeks ago</span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+            {% endblock %}
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="container mt-0">
+    <div class="row">
+        <div class="col-md-10"></div>
+        <button class="btn btn-block  btn-gradient-info mt-4"type="button"><a href="upload" style="color:#fff">+ exporter file</a></button>
+        {% comment %} <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+          <i class="fa fa-plus"></i> Upload CSV
+        </button> {% endcomment %}
+         
+        </div>
+    <div class="row">
+   {%for x in data %}
+      <div class="col-md-4 mt-5">
+        <div class="card">
+
+            <div class="card-body px-7 py-4-5">
+                <div class="row">
+
+                   
+                    <div class="col-md-8">
+                        
+                        <h5 class="font-semibold"><a href="{% url 'table' x.id%}"> <img src="{% static 'assets/images/aa.png'%}" alt="logo" />{{x}}</a></h5>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    
+   {%endfor%}
+  
+
+
+
+  </div>
+</div>
+
+</div>
+
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+</div>
+</div>
+{% endblock %}

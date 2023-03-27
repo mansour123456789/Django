@@ -1,0 +1,118 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper" >
+     
+  <div class="row">
+    <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+
+
+
+
+
+
+
+
+
+          
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">ajouter route</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% block jj %}
+      <form method="post" enctype=""> 
+          {% csrf_token %}
+          
+         
+
+          <div class="modal-body" style="background-color: beige;">
+            
+            
+            <div class="form-group row">
+              <label for="rute" class="col-sm-3 col-form-label">name rute</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="rute" name="rute" placeholder="Name Rute">
+              </div>
+            
+            </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-gradient-success btn-icon-text">Upload</button>
+          </div>
+          {% endblock %}
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Bordered table</h4>
+                <p class="card-description">  <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-gradient-success btn-icon-text">ajouter rute</button>
+                 
+                </p>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th> # </th>
+                      <th> name Rute </th>
+                      <th> ADD </th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for x in data %}
+                    <tr>
+                      <td>{{x.id}}</td>
+                      <td>{{x.name}}</td>
+                      <td class="col-lg-3">
+
+                    
+                          <button type="button" class="btn btn-gradient-info btn-rounded btn-fw">resulta</button>
+                         <a href={% url 'condition' %} > <button type="button" class="btn btn-gradient-info btn-rounded btn-fw">condition</button> </a>
+                      
+                      </td>
+                    </tr>
+                    {%endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>  
+
+
+{% endblock %}
