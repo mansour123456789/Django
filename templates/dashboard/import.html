@@ -7,7 +7,10 @@
     <div class="content-wrapper">
       <div class="page-header">
         <h3 class="page-title"> FILE </h3>
+        
         <nav aria-label="breadcrumb">
+          
+        
          
         </nav>
       </div>
@@ -53,7 +56,43 @@
                 <div class="col-12 grid-margin">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Recent Tickets</h4>
+                     
+
+                      <p><h1 align="center">Page d'entrée de poste</h1></p>
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-4"><h2>Position <b>Details</b></h2></div>
+                    <div class="col-sm-8">
+                        <a href="{% url 'table' id %}" type="button" class="btn btn-info">
+                            <i class="fa fa-file-excel-o"></i> File
+                        </a>
+                       
+                        <a href="" type="button" class="btn btn-info">
+                            <i class="fa fa-file-excel-o"></i>choisi un route
+                        </a>
+                        <a href="" type="button" class="btn btn-info">
+                            <i class="fa fa-file-excel-o"></i> condition appliquer
+                        </a>
+                       
+                    
+                      
+                       
+                    </div>
+                    <div class='btn btn-info' id="displaymessage" style="display:none;width:100%;margin-top:10px;"></div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
                       <div class="table-responsive">
                         <table class="table">
                 <thead>
@@ -138,7 +177,7 @@
                 <tbody> 
                    
                     
-                    <td>               {{x.article}}</td>
+                    <td class="table-danger">               {{x.article}}</td>
                     <td>   {{x.designation_article}}</td>
              <td>        {{ x.text_article}}</td>
            <td>            {{x.grpe_march}}</td>

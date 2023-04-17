@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('profil/', include('profil.urls')),
+       
+    path('', TemplateView.as_view(template_name='account/login.html'), name=''),
     
     path('home/', TemplateView.as_view(template_name='dashboard/home.html'), name='home'),
      path('importt/', TemplateView.as_view(template_name='dashboard/import.html'), name='import'),

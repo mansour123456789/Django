@@ -6,18 +6,64 @@ from .forms import NameForm
 from .models import FileMs
 from .models import File
 from .models import rute
+from .models import condition
+from .models import resulta
 
-from tablib import Dataset
+from tablib import Dataset  
 from .resource import modelresource
 import pandas as pd 
 import psycopg2 
 
 # Create your views here.
 
-def condition(request):
-    
 
-    return render(request,'dashboard/condition.html'  )
+
+def res (request):
+    context = {}
+    cc=resulta.objects.all()
+    context['data']=cc
+    return render(request,'dashboard/resulta.html' ,context )
+def ress (request,id):
+    context = {}
+   
+    r=condition.objects.filter(id=id).get()
+    cc=resulta.objects.filter(id_rute=r)
+    context['data']=cc
+    if request.method== 'POST':
+        field=request.POST['choix']
+        co=request.POST['condition']
+        c=resulta.objects.create(field=field,Res=co,id_rute=r)
+        c.save()
+    return render(request,'dashboard/resulta.html' ,context )
+
+
+
+
+
+
+
+
+
+
+
+
+def Condition(request):
+    context = {}
+    
+    cc=condition.objects.all()
+    context['data']=cc
+    return render(request,'dashboard/condition.html' ,context )
+def conditionn(request,id):
+    context = {}
+    r=rute.objects.filter(id=id).get()
+    cc=condition.objects.filter(id_rute=r)
+    context['data']=cc
+    if request.method== 'POST':
+        field=request.POST['choix']
+        co=request.POST['condition']
+        c=condition.objects.create(field=field,Con=co,id_rute=r)
+        c.save()
+    return render(request,'dashboard/condition.html' ,context )
 
 
 
@@ -55,8 +101,10 @@ def aa(request):
 
 def table(request,id):
     context = {}
-    d=FileMs.objects.filter(file_id=128)
+    
+    d=FileMs.objects.filter(file_id=id)
     context['data']=d
+    context['id']=id
     return render(request,'dashboard/import.html',context )
 
 
@@ -101,7 +149,9 @@ def upload(request):
         
         
         conn=psycopg2.connect(host='localhost',dbname='projet',user='postgres',password='123456789',port='5432')
-        import_ms_file(file,conn)        
+        import_ms_file(file,conn) 
+        file=File.objects.all()
+        context['data']=file       
         
     return render(request , 'dashboard/file.html' , context)
 
@@ -115,44 +165,16 @@ def import_ms_file (file,conn):
     ll.save()
     dc=pd.read_excel(file)
     f=dc
-  
-    
- 
-
-    # msfile=io.StringIO()
-    # t=dc.to_csv(index=None,header=None)
-    # with open(t, 'r') as read_obj, 
-    #     open('output_1.csv', 'w', newline='') as write_obj:
-    # # Create a csv.reader object from the input file object
-            #   csv_reader = csv.reader(read_obj)
-    # Create a csv.writer object from the output file object
-            #   csv_writer = csv.writer(write_obj)
-    # Read each row of the input csv file as list
-            #   for row in csv_reader:
-        # Append the default text in the row / list
-                #    row.append('aaaaaaaaa')
-        # Add the updated row / list to the output file
-                #    csv_writer.writerow(row)
-    
     filee=pd.DataFrame(f)
-  
     filee.loc[:,'file_id']=ll.id
-   
-    # filee.insert(loc=0, column="file_id", value=ll.pk)
-    # msfile.seek(0)
     msfilee=io.StringIO()
     msfilee.write(filee.to_csv(index=None,header=None))
     msfilee.seek(0)
-    
     print(filee)
     print("///////////////////////////////")
-
     msfilee.seek(0)
     print(msfilee.read())
-      
     msfilee.seek(0)
-     
-
     with connn.cursor() as c:
             vall=ll.name,
             

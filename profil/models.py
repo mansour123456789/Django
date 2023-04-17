@@ -117,33 +117,37 @@ class FileMs(models.Model):
 
 
 
-
-
-
-class ligne_modifier (models.Model):
-    field=models.CharField( max_length=50,null=True,blank=True)
-    Vieux=models.CharField( max_length=50,null=True,blank=True)
-    nouveau=models.CharField( max_length=50,null=True,blank=True)
-
-
-
 class rute (models.Model):
    
     name=models.CharField( max_length=50,null=True,blank=True)
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
    
+class ligne_modifier (models.Model):
+    
+    field=models.CharField( max_length=50,null=True,blank=True)
+    Vieux=models.CharField( max_length=50,null=True,blank=True)
+    nouveau=models.CharField( max_length=50,null=True,blank=True)
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    id_rutee=models.ForeignKey(rute, on_delete=models.CASCADE ,null=True)
 
 class condition (models.Model):
     
     field=models.CharField( max_length=50,null=True,blank=True)
-    mot=models.CharField( max_length=50,null=True,blank=True)
+    Con=models.CharField( max_length=50,null=True,blank=True)
     id_rute=models.ForeignKey(rute, on_delete=models.CASCADE)
 
 
 class resulta (models.Model):
     
     field=models.CharField( max_length=50,null=True,blank=True)
-    mot=models.CharField( max_length=50,null=True,blank=True)
-    id_rute=models.ForeignKey(rute, on_delete=models.CASCADE)
+    Res=models.CharField( max_length=50,null=True,blank=True)
+    id_condition=models.ForeignKey(condition, on_delete=models.CASCADE)
+
+
+
+
+
+
 
 
 

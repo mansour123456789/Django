@@ -3,6 +3,69 @@
 {% block content %}
 <!-- Modal -->
 
+<style>
+
+
+
+  
+
+
+.card{
+  width: 400px;
+  border: none;
+  border-radius: 10px;
+   
+  background-color: #fff;
+}
+
+
+
+.stats{
+
+      background: #f2f5f8 !important;
+
+    color: #000 !important;
+}
+.articles{
+  font-size:10px;
+  color: #a1aab9;
+}
+.number1{
+  font-weight:500;
+}
+.followers{
+    font-size:10px;
+  color: #a1aab9;
+
+}
+.number2{
+  font-weight:500;
+}
+.rating{
+    font-size:10px;
+  color: #a1aab9;
+}
+.number3{
+  font-weight:500;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -18,50 +81,11 @@
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="">Upload xlsx</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        {% block jj %}
-        <form method="post" enctype="multipart/form-data"> 
-            {% csrf_token %}
-           
-
-            <div class="modal-body" style="background-color: beige;">
-                <label>Upload a file </lable> 
-                    <br>
-                    <br>
-                    
-          
-          
-         
-                    <input type="file" name="my_file"> <br>
-                    <p><a href={% url 'filee' %}>aa</a>Only accepts xlsx file </p>
-                    <p>xlsx Formpat : </p>
-                    <span>color, name, age</span> <br>
-                    <span>UI/UX, NYC Some Address 123, 3 weeks ago</span>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Upload</button>
-            </div>
-            {% endblock %}
-        </form>
-        
-      </div>
-    </div>
-  </div>
-
 
 
 <div class="container mt-0">
     <div class="row">
-        <div class="col-md-10"></div>
+        <div class="col-md-11"></div>
         <button class="btn btn-block  btn-gradient-info mt-4"type="button"><a href="upload" style="color:#fff">+ exporter file</a></button>
         {% comment %} <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-plus"></i> Upload CSV
@@ -70,17 +94,69 @@
         </div>
     <div class="row">
    {%for x in data %}
-      <div class="col-md-4 mt-5">
+      <div class="col-md-6 mt-6">
         <div class="card">
 
-            <div class="card-body px-7 py-4-5">
+            <div class="card-body px-0 py-2-4">
                 <div class="row">
 
                    
-                    <div class="col-md-8">
+                    <div class="col-md-10">
+                      <div class="card p-6">
+
+                        <div class="d-flex align-items-center">
+                  
+                            <div class="image">
+                        <img src="{% static 'assets/images/aa.png'%}" class="rounded" width="155" >
+                        </div>
+                  
+                        <div class="ml-3 w-100">
+                            
+                           <h4 class="mb-0 mt-0">{{x.name}}</h4>
+                           <span>{{x}}</span>
+                  
+                           <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                  
+                            <div class="d-flex flex-column">
+                  
+                                <span class="articles">Articles</span>
+                                <span class="number1">38</span>
+                                
+                            </div>
+                  
+                            <div class="d-flex flex-column">
+                  
+                                <span class="followers">Followers</span>
+                                <span class="number2">980</span>
+                                
+                            </div>
+                  
+                  
+                            <div class="d-flex flex-column">
+                  
+                                <span class="rating">Rating</span>
+                                <span class="number3">8.9</span>
+                                
+                            </div>
+                               
+                           </div>
+                  
+                  
+                           <div class="button mt-2 d-flex flex-row align-items-center">
+                  <a href="{% url 'table' x.id%}">
+                            <button class="btn btn-sm btn-outline-primary w-100">Chat</button></a>
+                            <button class="btn btn-sm btn-primary w-100 ml-2">Follow</button>
+                  
+                               
+                           </div>
+                  
+                  
+                        </div>
+                  
+                            
+                        </div>
                         
-                        <h5 class="font-semibold"><a href="{% url 'table' x.id%}"> <img src="{% static 'assets/images/aa.png'%}" alt="logo" />{{x}}</a></h5>
-                        
+                    </div> 
                     </div>
 
                 </div>

@@ -466,7 +466,7 @@ p
             <a class="dropdown-item" href="#">
               <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{% url 'account_logout' %}">
               <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
           </div>
         </li>
@@ -508,7 +508,7 @@ p
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.html" style="color:#7079bf;">
+          <a class="nav-link" href="{% url 'index'%}" style="color:#7079bf;">
             <span class="menu-title" style="color:#7079bf;">Dashboard</span>
             <i class="mdi mdi-home menu-icon" style="color:#7079bf;"></i>
           </a>
@@ -538,7 +538,7 @@ p
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link" href="{% url 'rute'%}">rute</a></li>
-              <li class="nav-item"> <a class="nav-link" href="{% url 'condition'%}">condition</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'Condition'%}">condition</a></li>
               <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">resultat</a></li>
             </ul>
           </div>
@@ -572,10 +572,18 @@ p
       </ul>
     </nav>
     <!-- partial -->
-   
-    
+          
+          
+          
+          
+          
+          
+    {% else %}
+    <div><a href="{% url 'account_login' %}">Connexion</a></div>
+    <div><a  href="{% url 'account_signup' %}">S'enregistrer</a></div>
+    {% endif %}
 
-          {% block content %}
+    {% block content %}
           {% endblock %}
     
          
@@ -602,73 +610,23 @@ p
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style></style>
-
-
-
-
-
-
-
-
-
  
  
  
+{% comment %}  
  
- 
- 
- 
- 
- 
-      <!-- <div><a class="text-light" href="{% url 'account_email' %}">Change E-mail</a></div>
+<div><a class="text-light" href="{% url 'account_email' %}">Change E-mail</a></div>
           <div><a class="text-light" href="{% url 'home' %}">Home</a></div>
-          <div><a class="text-light" href="
-            ">Se deconnecter</a></div>
-          -->
+          <div><a class="text-light" href="">Se deconnecter</a></div>
+           {% endcomment %}
           
           
           
           
           
-          
-          
-          
-          
-          
-          
-          {% else %}
-
-           
-
-
-
-
-
-
-
-
-
-
-          <div><a class="text-light" href="{% url 'account_login' %}">Connexion</a></div>
-          <div><a class="text-light" href="{% url 'account_signup' %}">S'enregistrer</a></div>
-         {% endif %}
+   
+    
+         
       </div>
     {% comment %} </div>
     {% block content %}

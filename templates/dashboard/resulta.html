@@ -25,7 +25,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="">ajouter route</h5>
+        <h5 class="modal-title" id="">Resultat</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -37,15 +37,95 @@
          
 
           <div class="modal-body" style="background-color: beige;">
-            
-            
             <div class="form-group row">
-              <label for="rute" class="col-sm-3 col-form-label">name rute</label>
+            <label for="inputState" class="col-sm-3 col-form-label">State</label>
+            <div class="col-sm-9">
+            <select id="inputState" class="form-control" name="choix">
+              <option selected>Choose...</option>
+              
+              <option >               article</option>
+              <option>   designation_article</option>
+       <option>        text_article</option>
+     <option>            grpe_march</option>
+<option>                   div</option>
+<option>                 ctrpr</option>
+  <option>               typ_app</option>
+<option>                   a_s</option>
+<option>                   tcy</option>
+<option>                   dfi</option>
+<option>                   dpr</option>
+<option>                 horiz</option>
+<option>                    mp</option>
+<option>                     r</option>
+<option>                  tyar</option>
+<option>                   nal</option>
+<option>                   i_c</option>
+    <option>             aappr_def</option>
+<option>                 mgapp</option>
+<option>                   mag</option>
+<option>                    tl</option>
+   <option>              lot_fixe</option>
+<option>                   uq1</option>
+         <option>        stock_securite</option>
+<option>                   uq0</option>
+                
+<option>                   tre</option>
+<option>                  gest</option>
+<option>                    di</option> 
+<option>                 rebut</option>
+<option>                   gac</option>
+ <option>                Profil</option>
+ <option>                prpiAt</option>
+   <option>           cree_par</option>
+ <option>               langue</option>
+  <option>               Cree_le</option>
+<option>                  gcha</option>
+            <option>   gs</option>
+                 <option> mode_de_comparaison_des_besoin</option>
+          <option>      int_ajust_amont</option>
+         <option>        int_ajust_aval</option>
+       <option>          taille_l_min</option>
+<option>                   uq2</option>
+       <option>          val_arrondie</option>
+<option>                   uq3</option>
+        <option>         taille_lot_mx</option>
+<option>                   uq4</option>
+        <option>         stock_maximum</option>
+<option>                   uq5</option>
+<option>                 chant</option>
+<option>                 typ</option>
+    <option>           delai_sec</option>
+     <option>            delai_sec1</option>
+            <option>    ctrl_destinataire</option>
+        <option>         article_rempl</option>
+<option>                   dv</option>
+<option>                   gml</option>
+<option>                  grpl</option>
+<option>                   abc</option>
+<option>                   uq6</option>
+       <option>          element_dOTP</option>
+<option>                grpa</option>
+        <option>       Code_pilotage</option>
+            <option>     hierarch_produits</option>
+     <option>           poids_brut</option>
+<option>                unp1</option>
+    <option>             poids_net</option>
+<option>                  unp2</option>
+     <option>            pas_de_ccr</option>
+               <option> Taille_de_lot_du_CCR</option>
+<option>                   uq7</option>
+
+            </select>
+          </div>
+          </div>
+        </div>
+            <div class="form-group row">
+              <label for="rute" class="col-sm-3 col-form-label">Resulta :</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="rute" name="rute" placeholder="Name Rute">
+                <input type="text" class="form-control" id="rute" name="condition" placeholder="Name Rute">
               </div>
             
-            </div>
+           
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -74,31 +154,26 @@
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Bordered table</h4>
-                <p class="card-description">  <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-gradient-success btn-icon-text">ajouter rute</button>
+                <h4 class="card-title">Resultat table</h4>
+                <p class="card-description">  <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-gradient-success btn-icon-text">ajouter Resultat</button>
                  
                 </p>
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th> # </th>
-                      <th> name Rute </th>
-                      <th> ADD </th>
+                      <th> id_rute </th>
+                      <th> field</th>
+                      <th> case </th>
                       
                     </tr>
                   </thead>
                   <tbody>
                     {%for x in data %}
                     <tr>
-                      <td>{{x.id}}</td>
-                      <td>{{x.name}}</td>
-                      <td class="col-lg-3">
-
-                    
-                          <button type="button" class="btn btn-gradient-info btn-rounded btn-fw">resulta</button>
-                          <button type="button" class="btn btn-gradient-info btn-rounded btn-fw">condition</button>
-                      
-                      </td>
+                      <td>{{x.pk}}</td>
+                      <td>{{x.field}}</td>
+                      <td class=""> {{x.Res}} </td>
+                      <td class="col-lg-3"> <button type="button" class="btn btn-secondary" >Close</button> </td>
                     </tr>
                     {%endfor %}
                   </tbody>
