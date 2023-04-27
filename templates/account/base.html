@@ -434,23 +434,14 @@ p
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
       <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">    
         <a href=".">  
-          <span class="avatar avatar-sm" style="background-image: url({% static 'staticc/photos/a.png'%});width:120px;height:25px;"></span>  </a>
+          <span class="avatar avatar-sm" style="background-image: url({% static 'staticc/photos/a.png'%});width:90px;height:25px;"></span>  </a>
       </h1> <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'staticc/photos/a.png'%}" style="width:120px;height:25px;" alt="logo" /></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
-      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" >
         <span class="mdi mdi-menu"></span>
       </button>
-      <div class="search-field d-none d-md-block">
-        <form class="d-flex align-items-center h-100" action="#">
-          <div class="input-group">
-            <div class="input-group-prepend bg-transparent">
-              <i class="input-group-text border-0 mdi mdi-magnify" style="color:#7079bf;"></i>
-            </div>
-            <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
-          </div>
-        </form>
-      </div>
+     
       <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item nav-profile dropdown">
           <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -470,17 +461,7 @@ p
               <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
           </div>
         </li>
-        <li class="nav-item d-none d-lg-block full-screen-link">
-          <a class="nav-link">
-            <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-          </a>
-        </li>
        
-        <li class="nav-item nav-logout d-none d-lg-block">
-          <a class="nav-link" href="#">
-            <i class="mdi mdi-power"></i>
-          </a>
-        </li>
        
       </ul>
       <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -508,32 +489,25 @@ p
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index'%}" style="color:#7079bf;">
-            <span class="menu-title" style="color:#7079bf;">Dashboard</span>
-            <i class="mdi mdi-home menu-icon" style="color:#7079bf;"></i>
+          <a class="nav-link" href="{% url 'index'%}" style="color:#i00;">
+            <span class="menu-title" style="color:#i00;">Dashboard</span>
+            <i class="mdi mdi-home menu-icon" style="color:#i00;"></i>
           </a>
         </li>
-
-  
         <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#uii-basic" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title"style="color:#7079bf;">les Files</span>
-            <i class="menu-arrow" style="color:#7079bf;"></i>
-            <i class="mdi mdi-format-list-bulleted menu-icon"style="color:#7079bf;"></i>
+          <a class="nav-link" href="{% url 'file'%}" style="color:#i00;">
+            <span class="menu-title" style="color:#i00;">Les File</span>
+            <i class="mdi mdi-format-list-bulleted menu-icon"style="color:#i00;"></i>
           </a>
-          <div class="collapse" id="uii-basic">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{% url 'file'%}">new file</a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">file updat</a></li>
-            </ul>
-          </div>
         </li>
+  
+        
 
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title"style="color:#7079bf;">rute</span>
-            <i class="menu-arrow" style="color:#7079bf;"></i>
-            <i class="mdi mdi-crosshairs-gps menu-icon" style="color:#7079bf;"></i>
+            <span class="menu-title"style="color:#i00;">rute</span>
+            <i class="menu-arrow" style="color:#i00;"></i>
+            <i class="mdi mdi-crosshairs-gps menu-icon" style="color:#i00;"></i>
           </a>
           <div class="collapse" id="ui-basic">
             <ul class="nav flex-column sub-menu">
@@ -544,23 +518,13 @@ p
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="upload"style="color:#7079bf;">
-            <span class="menu-title" style="color:#7079bf;">tester file</span>
-            <i class="mdi mdi-chart-bar menu-icon"style="color:#7079bf;"></i>
+          <a class="nav-link" href="upload"style="color:#i00;">
+            <span class="menu-title" style="color:#i00;">tester file</span>
+            <i class="mdi mdi-chart-bar menu-icon"style="color:#i00;"></i>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="pages/tables/basic-table.html">
-            <span class="menu-title" style="color:#7079bf;">execut file</span>
-            <i class="mdi mdi-table-large menu-icon" style="color:#7079bf;"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="pages/tables/basic-table.html">
-            <span class="menu-title" style="color:#7079bf;">telecharger file</span>
-            <i class="mdi mdi-table-large menu-icon" style="color:#7079bf;"></i>
-          </a>
-        </li>
+       
+       
         <li class="nav-item sidebar-actions">
           <span class="nav-link">
             <div class="border-bottom">
@@ -662,10 +626,6 @@ p
 </div>
 
 {% endblock body %}
-
-
-
-
 
 
 

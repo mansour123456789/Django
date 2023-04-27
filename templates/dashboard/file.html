@@ -71,13 +71,40 @@
 
 <div class="main-panel">
   <div class="content-wrapper" >
-   
+    <div class="page-header">
+      <h3 class="page-title"> List of FILE </h3>
+      
+      <nav aria-label="breadcrumb">
+        
+      
+       
+      </nav>
+    </div>
 <div class="row">
   <div class="col-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-     
 
+
+        <div class="table-title">
+          <div class="row">
+              <div class="col-sm-9"><h2>Position <b>Details</b></h2></div>
+              <br>
+              <div class="col-sm-1">
+                <a href="upload" ><button class="btn btn-outline-success btn-icon-text"type="button">+ exporter file</button></a>
+       
+                 
+               
+                  
+                 
+              
+                
+                 
+              </div>
+                     </div>
+      </div>
+
+   
 
 
 
@@ -86,7 +113,6 @@
 <div class="container mt-0">
     <div class="row">
         <div class="col-md-11"></div>
-        <button class="btn btn-block  btn-gradient-info mt-4"type="button"><a href="upload" style="color:#fff">+ exporter file</a></button>
         {% comment %} <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-plus"></i> Upload CSV
         </button> {% endcomment %}
@@ -112,40 +138,37 @@
                   
                         <div class="ml-3 w-100">
                             
-                           <h4 class="mb-0 mt-0">{{x.name}}</h4>
-                           <span>{{x}}</span>
+                           <h4 class="mb-0 mt-0">{{ x }}</h4>
+                           <span>{{x.name}}</span>
                   
                            <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
                   
                             <div class="d-flex flex-column">
-                  
-                                <span class="articles">Articles</span>
-                                <span class="number1">38</span>
+                              <span class="followers">imported_by</span>
+                              <span class="number2">{{x.imported_by}}</span>
+                                
                                 
                             </div>
                   
                             <div class="d-flex flex-column">
                   
-                                <span class="followers">Followers</span>
-                                <span class="number2">980</span>
+                              <span class="articles">date</span>
+                              <span class="number1">{{x.timestamp}}</span>
                                 
                             </div>
                   
                   
-                            <div class="d-flex flex-column">
-                  
-                                <span class="rating">Rating</span>
-                                <span class="number3">8.9</span>
-                                
-                            </div>
+                           
                                
                            </div>
                   
                   
                            <div class="button mt-2 d-flex flex-row align-items-center">
+                            <a href="{% url 'table' x.id%}">
+                              <button class="btn btn-sm btn btn-gradient-success  w-100">inspecter</button></a>
                   <a href="{% url 'table' x.id%}">
-                            <button class="btn btn-sm btn-outline-primary w-100">Chat</button></a>
-                            <button class="btn btn-sm btn-primary w-100 ml-2">Follow</button>
+                            <button class="btn btn-sm btn btn-gradient-info btn-gradient-infox w-100">filtrer</button></a>
+                            <button class="btn btn-sm btn btn-gradient-danger w-100 ml-2" onlick=PopUp()>supprimer</button>
                   
                                
                            </div>

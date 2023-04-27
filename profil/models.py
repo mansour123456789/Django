@@ -19,9 +19,9 @@ from django.dispatch import receiver
 class File (models.Model):
     id = models.AutoField(primary_key=True)
     name= models.CharField( max_length=50,null=False,blank=True)
-    
-    
-    
+    imported_by =models.CharField( max_length=50,null=True,blank=True)
+    timestamp        = models.DateTimeField(auto_now=False,auto_now_add=True)
+    updated          = models.DateTimeField(auto_now=True, auto_now_add=False)
     def __str__(self):
         return str(self.id)
 
@@ -120,15 +120,10 @@ class FileMs(models.Model):
 class rute (models.Model):
    
     name=models.CharField( max_length=50,null=True,blank=True)
-    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-   
-class ligne_modifier (models.Model):
+    imported_by=models.CharField( max_length=50,null=True,blank=True)
+    date        = models.DateTimeField(auto_now=False,auto_now_add=True)
     
-    field=models.CharField( max_length=50,null=True,blank=True)
-    Vieux=models.CharField( max_length=50,null=True,blank=True)
-    nouveau=models.CharField( max_length=50,null=True,blank=True)
-    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    id_rutee=models.ForeignKey(rute, on_delete=models.CASCADE ,null=True)
+   
 
 class condition (models.Model):
     
@@ -145,26 +140,16 @@ class resulta (models.Model):
 
 
 
+class lm (models.Model):
+    
+    field=models.CharField( max_length=50,null=True,blank=True)
+    vieux=models.CharField( max_length=50,null=True,blank=True)
+    nouveau=models.CharField( max_length=50,null=True,blank=True)
+    id_condition=models.ForeignKey(condition, on_delete=models.CASCADE)
+    id_ligne=models.ForeignKey(FileMs, on_delete=models.CASCADE)
+    id_file=models.ForeignKey(File, on_delete=models.CASCADE)
+    
 
 
 
 
-
-
-
-# class condition(models.Model):
-#     codeN=models.CharField( max_length=50,null=True)
-#     field=models.CharField( max_length=50,null=True)
-#     value=models.CharField( max_length=50,null=True)
-
-#     def __str__(self):
-#         return self.codeN
-
-
-# class resulta(models.Model):
-#     condition_id=models.ForeignKey(condition.codeN, on_delete=models.CASCADE)
-#     field=models.CharField( max_length=50,null=True)
-#     value=models.CharField( max_length=50,null=True)
-
-#     def __str__(self):
-#         return self.condition_id        

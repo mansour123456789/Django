@@ -21,6 +21,9 @@ urlpatterns = [
     path('rute', views.rutee,name='rute'),
     path('upload', views.upload,name='upload'),
     
+    path('export<int:id>', views.export,name='export'),
+    path('test<int:id>', views.test,name='test'),
+    
     
     
 ]
