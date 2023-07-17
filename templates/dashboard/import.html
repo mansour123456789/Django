@@ -3,6 +3,7 @@
 {% block content %}
 
 <style>
+
   .tooltip {
     position: relative;
     display: inline-block;
@@ -38,7 +39,7 @@
 
 var doughnutPieData = {
 datasets: [{
-  data: [0,{{vrai}}, {{faux}}],
+  data: [ {{faux}},{{vrai}}],
   backgroundColor: [
     'rgba(255, 99, 132, 0.5)',
     'rgba(54, 162, 235, 0.5)',
@@ -59,8 +60,10 @@ datasets: [{
 
 // These labels appear in the legend and in the tooltips when hovering different arcs
 labels: [
-  'ghaltin {{faux}}%',
-  ' s7i7 {{vrai}}%',
+'Faux {{faux}}%',
+' Vrai  {{vrai}} %',
+  
+  
 ]
 };
 var doughnutPieOptions = {
@@ -89,7 +92,7 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> FILE {{id}}</h3>
+        <h3 class="page-title" style="color:#fff"> Fichier {{id}}</h3>
         
         <nav aria-label="breadcrumb">
           
@@ -98,8 +101,68 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
         </nav>
       </div>
   <div class="row">
+    <style>
+      .content-wrapper{
+        background-color: #181828; 
+      }
+     
+      @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,300");
+      
+      .prec{
+        background-color: #116;
+        display: inline-block;
+        padding: 6px 20px 6px 16px;
+        border: 1px solid #111;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+        border-radius: 3px;
+        color: #F5F5F5;
+        text-shadow: 0 1px 0 rgba(0,0,0,.2);
+        -webkit-font-smoothing: antialiased;
+        font-weight: 600;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 15px;
+        margin: 10px;
+        text-decoration: none;
+        position: relative;
+      }
+      
+      .prec:before{
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: #116;
+        left: -6px;
+        top: -9px;
+        border-radius: 4px;
+        -webkit-transform: rotate(135deg);
+        clip: rect(26px, 50px, 50px, 27px);
+        box-shadow: inset 0px -1px 0 #111, inset -1px 0px 0 #111, inset 0px -2px 0 rgba(255,255,255, .2);
+      }
+      
+      .prec:hover{
+        background: #135;
+      }
+      
+      .prec:hover:before{
+        background:#135;
+      }
+      
+      .prec:active{
+        background: #135;
+      }
+      
+      .prec:active:before{
+        background: #135;
+      }
+    
+    </style>
+        <a href="javascript:history.go(-1)" class="prec" style="width:10%">
+          &laquo; Previous 
+        </a>
     <div class="col-12 grid-margin stretch-card">
       <div class="card">
+       
         <div class="card-body">
 
 
@@ -134,6 +197,7 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                 </div>
             </div> {% endcomment %}
             <div class="row">
+             
                 <div class="col-12 grid-margin">
                   <div class="card">
                     <div class="card-body">
@@ -286,7 +350,6 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                               </button>
                             </div>
                             {% block tt %}
-                            <form data-dismiss="modal">
                             <form method="post" action="{% url 'export' id %}"> 
                                 {% csrf_token %}
                                
@@ -306,7 +369,6 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                                   <button type="submit" class="btn btn-gradient-success btn-icon-text">Appliquer</button>
                                 </div>
                             </form>
-                          </form>
                             {% endblock %}
                           </div>
                         </div>
@@ -422,15 +484,15 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
           
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-2"><h2>état <b> fichier </b></h2></div>
-                    <br>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5"><h2>état <b> fichier </b></h2></div>
+                   
+                    <div class="col-sm-7">
                         <a href="{% url 'table' id %}" type="button" class="btn btn-inverse-info btn-fw">
                             File
                         </a>
                        
                         
-                          <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-inverse-success btn-fw">ajouter rute</button>
+                          <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-inverse-success btn-fw">Applicer Role</button>
                  
                         <a href="" type="button" class="btn btn-inverse-secondary btn-fw"onclick='overlay()' data-toggle="modal" data-target="#example">
                             <i class="fa fa-file-excel-o"></i> TEST
@@ -495,7 +557,7 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
                       <div class="table-responsive">
                         <table class="table">
-                <thead>
+                <thead >
                     
                     <tr>
          <th>               article</th>
@@ -577,25 +639,25 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                 <tbody> 
                 
     {%if x.article.0.5 %}
-                   <td class="table-danger" >         <a  style="color:black" href="#" >     {{x.article.0.2}}</a> </td>
+                   <td class="table-danger" >         <a  style="color:black" href="{% url 'hestorique' x.pk  %}" >     {{x.article.0.3}}</a> </td>
                     {%else%}
                     <td >               {{x.article}}</td>
                     {%endif%}
 
                     {%if x.designation_article.0.5 %}
-                    <td class="table-danger" >     {{x.designation_article.0.2}}</td>
+                    <td class="table-danger" >     {{x.designation_article.0.3}}</td>
                     {%else%}
                     <td >               {{x.designation_article}}</td>
                     {%endif%}
 
 
                     {%if x.text_article.0.5 %}
-                    <td class="table-danger" >     {{x.text_article.0.2}}</td>
+                    <td class="table-danger" >     {{x.text_article.0.3}}</td>
                     {%else%}
                     <td >               {{x.text_article}}</td>
                     {%endif%}
                     {%if x.grpe_march.0.5 %}
-                    <td class="table-danger" >     {{x.grpe_march.0.2}}</td>
+                    <td class="table-danger" >     {{x.grpe_march.0.3}}</td>
                     {%else%}
                     <td >               {{x.grpe_march}}</td>
                     {%endif%}
@@ -603,68 +665,68 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.div.0.5 %}
-                    <td class="table-danger" >     {{x.div.0.2}}</td>
+                    <td class="table-danger" >     {{x.div.0.3}}</td>
                     {%else%}
                     <td >               {{x.div}}</td>
                     {%endif%}
                     {%if x.ctrpr.0.5 %}
-                    <td class="table-danger" >     {{x.ctrpr.0.2}}</td>
+                    <td class="table-danger" >     {{x.ctrpr.0.3}}</td>
                     {%else%}
                     <td >               {{x.ctrpr}}</td>
                     {%endif%}
 
                     {%if x.typ_app.0.5 %}
-                    <td class="table-danger" >     {{x.typ_app.0.2}}</td>
+                    <td class="table-danger" >     {{x.typ_app.0.3}}</td>
                     {%else%}
                     <td >               {{x.typ_app}}</td>
                     {%endif%}
                     {%if x.a_s.0.5 %}
-                    <td class="table-danger" >     {{x.a_s.0.2}}</td>
+                    <td class="table-danger" >     {{x.a_s.0.3}}</td>
                     {%else%}
                     <td >               {{x.a_s}}</td>
                     {%endif%}
 
 
                     {%if x.tcy.0.5 %}
-                    <td class="table-danger" >     {{x.tcy.0.2}}</td>
+                    <td class="table-danger" >     {{x.tcy.0.3}}</td>
                     {%else%}
                     <td >               {{x.tcy}}</td>
                     {%endif%}
                     {%if x.dfi.0.5 %}
-                    <td class="table-danger" >     {{x.dfi.0.2}}</td>
+                    <td class="table-danger" >     {{x.dfi.0.3}}</td>
                     {%else%}
                     <td >               {{x.dfi}}</td>
                     {%endif%}
 
                     {%if x.dpr.0.5 %}
-                    <td class="table-danger" >     {{x.dpr.0.2}}</td>
+                    <td class="table-danger" >     {{x.dpr.0.3}}</td>
                     {%else%}
                     <td >               {{x.dpr}}</td>
                     {%endif%}
                     {%if x.horiz.0.5 %}
-                    <td class="table-danger" >     {{x.horiz.0.2}}</td>
+                    <td class="table-danger" >     {{x.horiz.0.3}}</td>
                     {%else%}
                     <td >               {{x.horiz}}</td>
                     {%endif%}
 
                     {%if x.mp.0.5 %}
-                    <td class="table-danger" >     {{x.mp.0.2}}</td>
+                    <td class="table-danger" >     {{x.mp.0.3}}</td>
                     {%else%}
                     <td >               {{x.mp}}</td>
                     {%endif%}
                     {%if x.r.0.5 %}
-                    <td class="table-danger" >     {{x.r.0.2}}</td>
+                    <td class="table-danger" >     {{x.r.0.3}}</td>
                     {%else%}
                     <td >               {{x.r}}</td>
                     {%endif%}
 
                     {%if x.tyar.0.5 %}
-                    <td class="table-danger" >     {{x.tyar.0.2}}</td>
+                    <td class="table-danger" >     {{x.tyar.0.3}}</td>
                     {%else%}
                     <td >               {{x.tyar}}</td>
                     {%endif%}
                     {%if x.nal.0.5 %}
-                    <td class="table-danger" >     {{x.nal.0.2}}</td>
+                    <td class="table-danger" >     {{x.nal.0.3}}</td>
                     {%else%}
                     <td >               {{x.nal}}</td>
                     {%endif%}
@@ -672,23 +734,23 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.i_c.0.5 %}
-                    <td class="table-danger" >     {{x.i_c.0.2}}</td>
+                    <td class="table-danger" >     {{x.i_c.0.3}}</td>
                     {%else%}
                     <td >               {{x.i_c}}</td>
                     {%endif%}
                     {%if x.aappr_def.0.5 %}
-                    <td class="table-danger" >     {{x.aappr_def.0.2}}</td>
+                    <td class="table-danger" >     {{x.aappr_def.0.3}}</td>
                     {%else%}
                     <td >               {{x.aappr_def}}</td>
                     {%endif%}
 
                     {%if x.mgapp.0.5 %}
-                    <td class="table-danger" >     {{x.mgapp.0.2}}</td>
+                    <td class="table-danger" >     {{x.mgapp.0.3}}</td>
                     {%else%}
                     <td >               {{x.mgapp}}</td>
                     {%endif%}
                     {%if x.mag.0.5 %}
-                    <td class="table-danger" >     {{x.mag.0.2}}</td>
+                    <td class="table-danger" >     {{x.mag.0.3}}</td>
                     {%else%}
                     <td >               {{x.mag}}</td>
                     {%endif%}
@@ -697,45 +759,45 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.tl.0.5 %}
-                    <td class="table-danger" >     {{x.tl.0.2}}</td>
+                    <td class="table-danger" >     {{x.tl.0.3}}</td>
                     {%else%}
                     <td >               {{x.tl}}</td>
                     {%endif%}
                     {%if x.lot_fixe.0.5 %}
-                    <td class="table-danger" >     {{x.lot_fixe.0.2}}</td>
+                    <td class="table-danger" >     {{x.lot_fixe.0.3}}</td>
                     {%else%}
                     <td >               {{x.lot_fixe}}</td>
                     {%endif%}
 
                     {%if x.uq1.0.5 %}
-                    <td class="table-danger" >     {{x.uq1.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq1.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq1}}</td>
                     {%endif%}
                     {%if x.stock_securite.0.5 %}
-                    <td class="table-danger" >     {{x.stock_securite.0.2}}</td>
+                    <td class="table-danger" >     {{x.stock_securite.0.3}}</td>
                     {%else%}
                     <td >               {{x.stock_securite}}</td>
                     {%endif%}
     
 
                     {%if x.uq0.0.5 %}
-                    <td class="table-danger" >     {{x.uq0.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq0.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq0}}</td>
                     {%endif%}
                     {%if x.tre.0.5 %}
-                    <td class="table-danger" >     {{x.tre.0.2}}</td>
+                    <td class="table-danger" >     {{x.tre.0.3}}</td>
                     {%else%}
                     <td >               {{x.tre}}</td>
                     {%endif%}
                     {%if x.gest.0.5 %}
-                    <td class="table-danger" >     {{x.gest.0.2}}</td>
+                    <td class="table-danger" >     {{x.gest.0.3}}</td>
                     {%else%}
                     <td >               {{x.gest}}</td>
                     {%endif%}
                     {%if x.di.0.5 %}
-                    <td class="table-danger" >     {{x.di.0.2}}</td>
+                    <td class="table-danger" >     {{x.di.0.3}}</td>
                     {%else%}
                     <td >               {{x.di}}</td>
                     {%endif%}
@@ -744,22 +806,22 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.rebut.0.5 %}
-                    <td class="table-danger" >     {{x.rebut.0.2}}</td>
+                    <td class="table-danger" >     {{x.rebut.0.3}}</td>
                     {%else%}
                     <td >               {{x.rebut}}</td>
                     {%endif%}
                     {%if x.gac.0.5 %}
-                    <td class="table-danger" >     {{x.gac.0.2}}</td>
+                    <td class="table-danger" >     {{x.gac.0.3}}</td>
                     {%else%}
                     <td >               {{x.gac}}</td>
                     {%endif%}
                     {%if x.Profil.0.5 %}
-                    <td class="table-danger" >     {{x.Profil.0.2}}</td>
+                    <td class="table-danger" >     {{x.Profil.0.3}}</td>
                     {%else%}
                     <td >               {{x.Profil}}</td>
                     {%endif%}
                     {%if x.prpiAt.0.5 %}
-                    <td class="table-danger" >     {{x.prpiAt.0.2}}</td>
+                    <td class="table-danger" >     {{x.prpiAt.0.3}}</td>
                     {%else%}
                     <td >               {{x.prpiAt}}</td>
                     {%endif%}
@@ -769,22 +831,22 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.cree_par.0.5 %}
-                    <td class="table-danger" >     {{x.cree_par.0.2}}</td>
+                    <td class="table-danger" >     {{x.cree_par.0.3}}</td>
                     {%else%}
                     <td >               {{x.cree_par}}</td>
                     {%endif%}
                     {%if x.langue.0.5 %}
-                    <td class="table-danger" >     {{x.langue.0.2}}</td>
+                    <td class="table-danger" >     {{x.langue.0.3}}</td>
                     {%else%}
                     <td >               {{x.languelangue}}</td>
                     {%endif%}
                     {%if x.Cree_le.0.5 %}
-                    <td class="table-danger" >     {{x.Cree_le.0.2}}</td>
+                    <td class="table-danger" >     {{x.Cree_le.0.3}}</td>
                     {%else%}
                     <td >               {{x.Cree_le}}</td>
                     {%endif%}
                     {%if x.gcha.0.5 %}
-                    <td class="table-danger" >     {{x.gcha.0.2}}</td>
+                    <td class="table-danger" >     {{x.gcha.0.3}}</td>
                     {%else%}
                     <td >               {{x.gcha}}</td>
                     {%endif%}
@@ -795,22 +857,22 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.gs.0.5 %}
-                    <td class="table-danger" >     {{x.gs.0.2}}</td>
+                    <td class="table-danger" >     {{x.gs.0.3}}</td>
                     {%else%}
                     <td >               {{x.gs}}</td>
                     {%endif%}
                     {%if x.mode_de_comparaison_des_besoin.0.5 %}
-                    <td class="table-danger" >     {{x.mode_de_comparaison_des_besoin.0.2}}</td>
+                    <td class="table-danger" >     {{x.mode_de_comparaison_des_besoin.0.3}}</td>
                     {%else%}
                     <td >               {{x.mode_de_comparaison_des_besoin}}</td>
                     {%endif%}
                     {%if x.int_ajust_amont.0.5 %}
-                    <td class="table-danger" >     {{x.int_ajust_amont.0.2}}</td>
+                    <td class="table-danger" >     {{x.int_ajust_amont.0.3}}</td>
                     {%else%}
                     <td >               {{x.int_ajust_amont}}</td>
                     {%endif%}
                     {%if x.int_ajust_aval.0.5 %}
-                    <td class="table-danger" >     {{x.int_ajust_aval.0.2}}</td>
+                    <td class="table-danger" >     {{x.int_ajust_aval.0.3}}</td>
                     {%else%}
                     <td >               {{x.int_ajust_aval}}</td>
                     {%endif%}
@@ -818,44 +880,44 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.taille_l_min.0.5 %}
-                    <td class="table-danger" >     {{x.taille_l_min.0.2}}</td>
+                    <td class="table-danger" >     {{x.taille_l_min.0.3}}</td>
                     {%else%}
                     <td >               {{x.taille_l_min}}</td>
                     {%endif%}
                     {%if x.uq2.0.5 %}
-                    <td class="table-danger" >     {{x.uq2.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq2.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq2}}</td>
                     {%endif%}
                     {%if x.val_arrondie.0.5 %}
-                    <td class="table-danger" >     {{x.val_arrondie.0.2}}</td>
+                    <td class="table-danger" >     {{x.val_arrondie.0.3}}</td>
                     {%else%}
                     <td >               {{x.val_arrondie}}</td>
                     {%endif%}
                     {%if x.uq3.0.5 %}
-                    <td class="table-danger" >     {{x.uq3.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq3.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq3}}</td>
                     {%endif%}
           
 
                     {%if x.taille_lot_mx.0.5 %}
-                    <td class="table-danger" >     {{x.taille_lot_mx.0.2}}</td>
+                    <td class="table-danger" >     {{x.taille_lot_mx.0.3}}</td>
                     {%else%}
                     <td >               {{x.taille_lot_mx}}</td>
                     {%endif%}
                     {%if x.uq4.0.5 %}
-                    <td class="table-danger" >     {{x.uq4.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq4.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq4}}</td>
                     {%endif%}
                     {%if x.stock_maximum.0.5 %}
-                    <td class="table-danger" >     {{x.stock_maximum.0.2}}</td>
+                    <td class="table-danger" >     {{x.stock_maximum.0.3}}</td>
                     {%else%}
                     <td >               {{x.stock_maximum}}</td>
                     {%endif%}
                     {%if x.uq5.0.5 %}
-                    <td class="table-danger" >     {{x.uq5.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq5.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq5}}</td>
                     {%endif%}
@@ -863,22 +925,22 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.chant.0.5 %}
-                    <td class="table-danger" >     {{x.chant.0.2}}</td>
+                    <td class="table-danger" >     {{x.chant.0.3}}</td>
                     {%else%}
                     <td >               {{x.chant}}</td>
                     {%endif%}
                     {%if x.typ.0.5 %}
-                    <td class="table-danger" >     {{x.typ.0.2}}</td>
+                    <td class="table-danger" >     {{x.typ.0.3}}</td>
                     {%else%}
                     <td >               {{x.typ}}</td>
                     {%endif%}
                     {%if x.delai_sec.0.5 %}
-                    <td class="table-danger" >     {{x.delai_sec.0.2}}</td>
+                    <td class="table-danger" >     {{x.delai_sec.0.3}}</td>
                     {%else%}
                     <td >               {{x.delai_sec}}</td>
                     {%endif%}
                     {%if x.delai_sec1.0.5 %}
-                    <td class="table-danger" >     {{x.delai_sec1.0.2}}</td>
+                    <td class="table-danger" >     {{x.delai_sec1.0.3}}</td>
                     {%else%}
                     <td >               {{x.delai_sec1}}</td>
                     {%endif%}
@@ -887,22 +949,22 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.ctrl_destinataire.0.5 %}
-                    <td class="table-danger" >     {{x.ctrl_destinataire.0.2}}</td>
+                    <td class="table-danger" >     {{x.ctrl_destinataire.0.3}}</td>
                     {%else%}
                     <td >               {{x.ctrl_destinataire}}</td>
                     {%endif%}
                     {%if x.article_rempl.0.5 %}
-                    <td class="table-danger" >     {{x.article_rempl.0.2}}</td>
+                    <td class="table-danger" >     {{x.article_rempl.0.3}}</td>
                     {%else%}
                     <td >               {{x.article_rempl}}</td>
                     {%endif%}
                     {%if x.dv.0.5 %}
-                    <td class="table-danger" >     {{x.dv.0.2}}</td>
+                    <td class="table-danger" >     {{x.dv.0.3}}</td>
                     {%else%}
                     <td >               {{x.dv}}</td>
                     {%endif%}
                     {%if x.gml.0.5 %}
-                    <td class="table-danger" >     {{x.gml.0.2}}</td>
+                    <td class="table-danger" >     {{x.gml.0.3}}</td>
                     {%else%}
                     <td >               {{x.gml}}</td>
                     {%endif%}
@@ -910,22 +972,22 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                 
 
                     {%if x.grpl.0.5 %}
-                    <td class="table-danger" >     {{x.grpl.0.2}}</td>
+                    <td class="table-danger" >     {{x.grpl.0.3}}</td>
                     {%else%}
                     <td >               {{x.grpl}}</td>
                     {%endif%}
                     {%if x.abc.0.5 %}
-                    <td class="table-danger" >     {{x.abc.0.2}}</td>
+                    <td class="table-danger" >     {{x.abc.0.3}}</td>
                     {%else%}
                     <td >               {{x.abc}}</td>
                     {%endif%}
                     {%if x.uq6.0.5 %}
-                    <td class="table-danger" >     {{x.uq6.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq6.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq6}}</td>
                     {%endif%}
                     {%if x.element_dOTP.0.5 %}
-                    <td class="table-danger" >     {{x.element_dOTP.0.2}}</td>
+                    <td class="table-danger" >     {{x.element_dOTP.0.3}}</td>
                     {%else%}
                     <td >               {{x.element_dOTP}}</td>
                     {%endif%}
@@ -933,22 +995,22 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.grpa.0.5 %}
-                    <td class="table-danger" >     {{x.grpa.0.2}}</td>
+                    <td class="table-danger" >     {{x.grpa.0.3}}</td>
                     {%else%}
                     <td >               {{x.grpa}}</td>
                     {%endif%}
                     {%if x.Code_pilotage.0.5 %}
-                    <td class="table-danger" >     {{x.Code_pilotage.0.2}}</td>
+                    <td class="table-danger" >     {{x.Code_pilotage.0.3}}</td>
                     {%else%}
                     <td >               {{x.Code_pilotage}}</td>
                     {%endif%}
                     {%if x.hierarch_produits.0.5 %}
-                    <td class="table-danger" >     {{x.hierarch_produits.0.2}}</td>
+                    <td class="table-danger" >     {{x.hierarch_produits.0.3}}</td>
                     {%else%}
                     <td >               {{x.hierarch_produits}}</td>
                     {%endif%}
                     {%if x.poids_brut.0.5 %}
-                    <td class="table-danger" >     {{x.poids_brut.0.2}}</td>
+                    <td class="table-danger" >     {{x.poids_brut.0.3}}</td>
                     {%else%}
                     <td >               {{x.poids_brut}}</td>
                     {%endif%}
@@ -956,33 +1018,33 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
 
 
                     {%if x.unp1.0.5 %}
-                    <td class="table-danger" >     {{x.unp1.0.2}}</td>
+                    <td class="table-danger" >     {{x.unp1.0.3}}</td>
                     {%else%}
                     <td >               {{x.unp1}}</td>
                     {%endif%}
                     {%if x.poids_net.0.5 %}
-                    <td class="table-danger" >     {{x.poids_net.0.2}}</td>
+                    <td class="table-danger" >     {{x.poids_net.0.3}}</td>
                     {%else%}
                     <td >               {{x.poids_net}}</td>
                     {%endif%}
                     {%if x.unp2.0.5 %}
-                    <td class="table-danger" >     {{x.unp2.0.2}}</td>
+                    <td class="table-danger" >     {{x.unp2.0.3}}</td>
                     {%else%}
                     <td >               {{x.unp2}}</td>
                     {%endif%}
                     {%if x.pas_de_ccr.0.5 %}
-                    <td class="table-danger" >     {{x.pas_de_ccr.0.2}}</td>
+                    <td class="table-danger" >     {{x.pas_de_ccr.0.3}}</td>
                     {%else%}
                     <td >               {{x.pas_de_ccr}}</td>
                     {%endif%}
  
                     {%if x.Taille_de_lot_du_CCR.0.5 %}
-                    <td class="table-danger" >     {{x.Taille_de_lot_du_CCR.0.2}}</td>
+                    <td class="table-danger" >     {{x.Taille_de_lot_du_CCR.0.3}}</td>
                     {%else%}
                     <td >               {{x.Taille_de_lot_du_CCR}}</td>
                     {%endif%}
                     {%if x.uq7.0.5 %}
-                    <td class="table-danger" >     {{x.uq7.0.2}}</td>
+                    <td class="table-danger" >     {{x.uq7.0.3}}</td>
                     {%else%}
                     <td >               {{x.uq7}}</td>
                     {%endif%}

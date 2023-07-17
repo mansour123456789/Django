@@ -4,7 +4,9 @@ import io, csv
 from concurrent.futures.thread import _worker
 from urllib import response
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required,permission_required
+from django.urls import reverse
+from django.shortcuts import get_object_or_404, render,redirect
 from requests import post
 from urllib3 import HTTPResponse
 from .forms import NameForm
@@ -13,7 +15,7 @@ from .models import File
 from .models import rute 
 from .models import condition,lm
 from .models import resulta
-
+from django.contrib.auth.models import User
 from tablib import Dataset  
 from .resource import modelresource
 import pandas as pd 
@@ -28,6 +30,7 @@ def res (request):
     cc=resulta.objects.all()
     context['data']=cc
     return render(request,'dashboard/resulta.html' ,context )
+
 def ress (request,id):
     context = {}
    
@@ -48,19 +51,13 @@ def ress (request,id):
 
 
 
-
-
-
-
-
-
-
 def Condition(request):
     context = {}
     
     cc=condition.objects.all()
     context['data']=cc
     return render(request,'dashboard/condition.html' ,context )
+
 def conditionn(request,id):
     context = {}
     r=rute.objects.filter(id=id).get()
@@ -74,14 +71,13 @@ def conditionn(request,id):
     return render(request,'dashboard/condition.html' ,context )
 
 
-
-
 def rutee(request):
     context = {}
 
     if request.method== 'POST':
         rutee=request.POST['rute']
-        aa=  rute.objects.create(name=rutee)
+        username = request.user.username
+        aa=  rute.objects.create(name=rutee,imported_by=username)
         all=rute.objects.all()
         context['data']=all
         
@@ -125,7 +121,6 @@ def aa(request):
 
 
  
-
 def table(request,id):
     context = {}
     N_case_modifier=0
@@ -141,7 +136,7 @@ def table(request,id):
         
         
         if((len(lm.objects.filter(id_file=id,id_ligne=i.pk,field='article').values_list()))>0):
-                     i.article=lm.objects.filter(id_file=id,id_ligne=i.pk,field='article').values_list()
+                     i.article=lm.objects.filter(id_file=id,id_ligne=i.pk,field='article').values_list()    
                      
         elif(lm.objects.filter(id_file=id,id_ligne=i.pk,field='designation_article')):
                      i.designation_article=lm.objects.filter(id_file=id,id_ligne=i.pk,field='designation_article').values_list()
@@ -349,6 +344,7 @@ def table(request,id):
                     h=m.field
                     field_res=str(h)
                     condition_res=str(m.Res)
+                    print(condition_res ,"//////////// resultat")
                     
                     w=FileMs.objects.filter(**{field_condition: condition_condition},file_id=id)
                     # .update(**{field_res:condition_res})
@@ -359,22 +355,23 @@ def table(request,id):
                          h=FileMs.objects.filter(pk=a.pk).get()
                          hh=FileMs.objects.filter(pk=a.pk).values_list(field_res,flat=True)
                          filee=File.objects.filter(id=a.file_id).get()
-                         if( field_condition == field_res):
+                         
                                 
 
-                          if(FileMs.objects.filter(**{field_condition: condition_condition} ,**{field_res: hh[0]})):
+                         if(FileMs.objects.filter(**{field_condition: condition_condition} ,**{field_res: condition_res},pk=a.pk)):
                            case_non_treter=case_non_treter+1
-                          else:
+                         else:
                                  ll= lm.objects.create(field=field_res,vieux=hh[0],nouveau=condition_res,id_condition=i,id_ligne=h,id_file=filee  )
                                  ll.save()
-                                 N_case_modifier=N_case_modifier+1  
+                                 N_case_modifier=N_case_modifier+1
+                                 FileMs.objects.filter(pk=a.pk).update(**{field_res:condition_res})
+                                 context['message']="modification avec sucssee"   
                          
                         
                         
                          print(h,"ttttttttttttttttttttttt",hh[0])
 
-                    w=FileMs.objects.filter(**{field_condition: condition_condition}).update(**{field_res:condition_res})
-                    context['message']="modification avec sucssee" 
+                    
 
                     # FileMs.objects.filter(blog=b).update(headline="Everything is the same")
         context['case']=nu_case
@@ -439,7 +436,7 @@ def test (request,id):
                          h=FileMs.objects.filter(pk=a.pk).get()
                          hh=FileMs.objects.filter(pk=a.pk).values_list(field_res,flat=True)
                          filee=File.objects.filter(id=a.file_id).get()
-                         if((FileMs.objects.filter(**{field_condition: condition_condition},**{field_res: hh[0]}).count())>0):
+                         if((FileMs.objects.filter(**{field_condition: condition_condition},**{field_res: condition_res},pk=a.pk).count())>0):
                            case_non_treter=case_non_treter+1
                          else:
                                  N_case_modifier=N_case_modifier+1  
@@ -448,11 +445,11 @@ def test (request,id):
                      
         context['case']=nu_case
         if( nu_case == 0 ):
-           context['faux']=0.0
-           context['vrai']=100.0
+           context['faux']=0
+           context['vrai']=100
         else:
-             context['faux']=(100*N_case_modifier)/nu_case
-             context['vrai']=(100*case_non_treter)/nu_case
+             context['faux']=int((100*N_case_modifier)/nu_case)
+             context['vrai']=int((100*case_non_treter)/nu_case)
                 
         context['m']=case_non_treter
         context['n']=N_case_modifier
@@ -480,6 +477,99 @@ def file(request):
 
 
 
+def ptest (request):
+    context={}
+    N_case_modifier=0
+    nu_case=0
+    case_non_treter=0
+    
+   
+   
+    r=rute.objects.all
+    f=File.objects.all
+    context['rute']=r
+    context['file']=f
+    
+    
+    
+            
+    return render(request,'dashboard/test.html',context )
+
+
+def page_test (request):
+    context={}
+    N_case_modifier=0
+    nu_case=0
+    case_non_treter=0
+    
+   
+   
+    r=rute.objects.all
+    f=File.objects.all
+    context['rute']=r
+    context['file']=f
+    
+    if(request.POST['test2'] == "vide" ):
+       
+                     context['cas']=1
+                     context['message']="remplir"
+                     context['class']="alert alert-danger  fade show"
+    else:                 
+        id=request.POST['test']
+        id_rute=request.POST['test2']
+        
+        condi=lm.objects.filter(id_file=id)
+       
+        r=rute.objects.all
+
+        context['con']=condi
+        context['data']=0
+        context['id']=id
+        context['rute']=r
+    
+    
+   
+    
+        
+        c=condition.objects.all().filter(id_rute=id_rute)
+        for i in c :
+            x=i.field
+            field_condition=str(x)
+            condition_condition=i.Con
+            c=resulta.objects.all().filter(id_condition=i)
+            for m in c :
+                    h=m.field
+                    field_res=str(h)
+                    condition_res=str(m.Res)
+                    w=FileMs.objects.filter(**{field_condition: condition_condition},file_id=id)                    
+                    for a in w :
+                         nu_case=nu_case+1
+                         h=FileMs.objects.filter(pk=a.pk).get()
+                         hh=FileMs.objects.filter(pk=a.pk).values_list(field_res,flat=True)
+                         filee=File.objects.filter(id=a.file_id).get()
+                         if((FileMs.objects.filter(**{field_condition: condition_condition},**{field_res: condition_res},pk=a.pk).count())>0):
+                           case_non_treter=case_non_treter+1
+                         else:
+                                 N_case_modifier=N_case_modifier+1  
+                         
+    
+                     
+    context['case']=nu_case
+    if( nu_case == 0 ):
+           context['faux']=0.0
+           context['vrai']=100.0
+    else:
+             context['faux']=int((100*N_case_modifier)/nu_case)
+             context['vrai']=int((100*case_non_treter)/nu_case)
+                
+             context['m']=case_non_treter
+             context['n']=N_case_modifier
+             context['class']="alert alert-dismissible fade show"
+             context['cas']=2
+             context['cass']=0
+   
+            
+    return render(request,'dashboard/test.html',context )
 
 
 
@@ -509,9 +599,143 @@ def file(request):
 
 
 
+def filter(request,id):
+    context = {}
+   
+    
+    context['id']=id
+    
+
+    return render(request,'dashboard/filter.html',context )
+
+
+def getfilter(request,id):
+    context = {}
+   
+    
+    context['id']=id
+    
+     
+    N_case_modifier=0
+    nu_case=0
+    case_non_treter=0
+    classs=""
+    
+    d=FileMs.objects.filter(file_id=id)
+   
+    condi=lm.objects.filter(id_file=id)
+    
+    
+
+   
+    context['id']=id
+    
+
+    if request.method== 'POST':
+        languages = request.POST.getlist('inlineCheckbox2')
+        print(languages)
+        if(languages):
+                if( request.POST['choix'] == "Choose..." or request.POST['condition'] == ""):
+                 
+                 context['data']=d
+               
+                 context['list']=languages
+                else:
+                        choix=request.POST['choix']
+                        con=request.POST['condition']
+                        w=FileMs.objects.filter(**{choix: con},file_id=id)
+                        context['list']=languages
+                        context['data']=w
+                        context['ms']='recherche dans la fileld '+choix +' le mot '+ con
+                 
+                
+        else:
+                context['data']=d
+                
+                context['list']=[
+                
+                'article',
+       'designation_article',
+       'text_article',
+       'grpe_march',
+       'div',
+       'ctrpr',
+       'typ_app',
+       'a_s',
+       'tcy',
+       'dfi',
+       'dpr',
+       'horiz',
+       'mp',
+       'r',
+       'tyar',
+       'nal',
+       'i_c',
+       'aappr_def',
+       'mgapp',
+       'mag',
+       'tl',
+       'lot_fixe',
+       'uq1',
+       'stock_securite',
+       'uq0',
+       'tre',
+       'gest',
+       'di',    
+       'rebut',
+       'gac',
+       'Profil',
+       'prpiAt',
+       'cree_par',
+       'langue',
+       'Cree_le',
+       'gcha',
+       'gs',
+       'mode_de_comparaison_des_besoin',
+       'int_ajust_amont',
+       'int_ajust_aval',
+       'taille_l_min',
+       'uq2',
+       'val_arrondie',
+       'uq3',
+       'taille_lot_mx',
+       'uq4',
+       'stock_maximum',
+       'uq5',
+       'chant',
+       'typ',
+       'delai_sec',
+       'delai_sec1',
+       'ctrl_destinataire',
+       'article_rempl',
+       'dv',
+       'gml',
+       'grpl',
+       'abc',
+       'uq6',
+       'element_dOTP',
+       'grpa',
+       'Code_pilotage',
+       'hierarch_produits',
+       'poids_brut',
+       'unp1',
+       'poids_net',
+       'unp2',
+       'pas_de_ccr',
+       'Taille_de_lot_du_CCR',
+       'uq7']
+                
+    
+        
 
 
 
+
+
+
+    
+    print  (context['list'])  
+    return render(request,'dashboard/filter.html',context )
 
 
 
@@ -655,7 +879,6 @@ def export (request,id):
 
 
 
-
 def upload(request):
     context = {}
     template = "dashboard/upload_file.html"
@@ -677,7 +900,7 @@ def upload(request):
         
         
         conn=psycopg2.connect(host='localhost',dbname='projet',user='postgres',password='123456789',port='5432')
-        import_ms_file(file,conn) 
+        import_ms_file(request,file,conn) 
         file=File.objects.all()
         context['data']=file       
         
@@ -686,10 +909,11 @@ def upload(request):
 
 
 
-def import_ms_file (file,conn):
+def import_ms_file (request,file,conn):
     #read file pandas
     connn=psycopg2.connect(host='localhost',dbname='projet',user='postgres',password='123456789',port='5432')
-    ll= File.objects.create(name=file)
+    username = request.user.username
+    ll= File.objects.create(name=file,imported_by=username )
     ll.save()
     dc=pd.read_excel(file)
     f=dc
@@ -800,13 +1024,48 @@ def import_ms_file (file,conn):
             
     connn.commit()
     
+
+
+
+
+def delit  (request,id):
+    context = {}
+    d=FileMs.objects.filter(file_id=id).delete()
+    File.objects.filter(id=id).delete()
+
+        
+    file=File.objects.all()
+    context['data']=file
     
+    return render(request,'dashboard/file.html',context )
+        
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+def hestorique(request,id):
+         context={}
+
+
+        
+         w=lm.objects.filter(id_ligne=id).all
+         context['data']=w
+        
+         return render(request , 'dashboard/hestorique.html' , context)
+        
 
 
 

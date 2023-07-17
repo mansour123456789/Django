@@ -19,13 +19,91 @@
 
 
 
-
-
-<body  class=" d-flex flex-column" style="margin-top: -40px;" >
   
-  <div class="page page-center">
-    <div class="container container-tight py-2">
-      <div class="text-center mb-1">
+
+
+
+
+
+
+
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row flex-grow">
+          <div class="col-lg-5 mx-auto">
+            <div class="auth-form-light text-left p-5">
+              <div class="brand-logo">
+               
+              </div>
+              
+
+          <h1 class="h2 text-center mb-1">{% trans "Sign In" %}</h1>
+
+          {% get_providers as socialaccount_providers %}
+      
+          {% if socialaccount_providers %}
+          <p>{% blocktrans with site.name as site_name %}Veuillez vous connecter avec un
+          de vos comptes tiers existants.<br>Ou, <a href="{{ signup_url }}">inscrivez-vous</a>
+          pour un compte {{ site_name }} et connectez-vous ci-dessous :{% endblocktrans %}</p>
+      
+          <div class="socialaccount_providers">
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+          </div>
+
+          {% endif %}
+       
+        <div class="hr-text">or</div>
+             
+              <div class="row">
+                <div class="col-md-9 offset-md-1">
+                  <form class="login" method="POST" action="{% url 'account_login' %}">
+                      {% csrf_token %}
+                      {{ form|crispy }}
+                      {% if redirect_field_value %}
+                      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                      {% endif %}
+                      <div class="d-grid">
+                        <button class="btn badge-gradient-info w-100" type="submit">{% trans "S'identifier" %}</button><br>
+                        <a class="button secondaryAction text-dark text-center" href="{% url 'account_reset_password' %}">{% trans "Mot de passe oublié?" %}</a>
+                      </div>
+                    </form>
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="content-wrapper d-flex align-items-center auth">
+      <div class="row flex-grow">
+        <div class="col-lg-4 mx-auto">
+          <div class="auth-form-light text-left p-5">
         <a href="." class="navbar-brand navbar-brand-autodark"><img src="{% static 'staticc/photos/a.png'%}" height="120" alt=""></a>
       </div>
       <div class="card card-md">
@@ -68,11 +146,16 @@
        
         
        
-      </div>
-      </div>
-    
     </div>
   </div>
+
+</div>
+</div>  
+</div>
+</div>
+
+</div>
+</div>
 
 
 

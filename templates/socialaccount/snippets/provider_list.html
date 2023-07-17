@@ -25,17 +25,19 @@
 </div>
 {% endfor %}
 {% endif %}
+{% if provider.name == "Google" %}
 <div class="my-1 offset-md-2">
   <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" 
      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
      <img 
       src="
-     {% with 'images/'|add:provider.name|add:'.png' as image %}
+     {% with '/'|add:provider.name|add:'.png' as image %}
       {% static image %}
      {% endwith %}
      " alt="{{ provider.name }}" height="40" width="260"/>
      </a>
 </div>
+{% endif %}
 {% endfor %}
             
           

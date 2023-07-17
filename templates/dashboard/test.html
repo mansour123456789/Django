@@ -1,0 +1,395 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+
+<style>
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  </style>
+
+<script >
+  $(function () {
+/* ChartJS
+* -------
+* Data and config for chartjs
+*/
+'use strict';
+
+var doughnutPieData = {
+datasets: [{
+  data: [{{faux}},{{vrai}} ],
+  backgroundColor: [
+    'rgba(255, 99, 132, 0.5)',
+    'rgba(54, 162, 235, 0.5)',
+    'rgba(255, 206, 86, 0.5)',
+    'rgba(75, 192, 192, 0.5)',
+    'rgba(153, 102, 255, 0.5)',
+    'rgba(255, 159, 64, 0.5)'
+  ],
+  borderColor: [
+    'rgba(255,99,132,1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+  ],
+}],
+
+// These labels appear in the legend and in the tooltips when hovering different arcs
+labels: [
+  'Faux {{faux}}%',
+  ' Vrai {{vrai}}%',
+]
+};
+var doughnutPieOptions = {
+responsive: true,
+animation: {
+  animateScale: true,
+  animateRotate: true
+}
+};
+
+
+if ($("#doughnutChart").length) {
+var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+var doughnutChart = new Chart(doughnutChartCanvas, {
+  type: 'doughnut',
+  data: doughnutPieData,
+  options: doughnutPieOptions
+});
+}
+
+
+});
+</script>
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title" style="color:#fff"> TEST </h3>
+        
+        <nav aria-label="breadcrumb">
+          
+        
+         
+        </nav>
+      </div>
+  <div class="row">
+    <style>
+      .content-wrapper{
+        background-color: #181828; 
+      }
+     
+      @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,300");
+      
+      .prec{
+        background-color: #116;
+        display: inline-block;
+        padding: 6px 20px 6px 16px;
+        border: 1px solid #111;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+        border-radius: 3px;
+        color: #F5F5F5;
+        text-shadow: 0 1px 0 rgba(0,0,0,.2);
+        -webkit-font-smoothing: antialiased;
+        font-weight: 600;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 15px;
+        margin: 10px;
+        text-decoration: none;
+        position: relative;
+      }
+      
+      .prec:before{
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: #116;
+        left: -6px;
+        top: -9px;
+        border-radius: 4px;
+        -webkit-transform: rotate(135deg);
+        clip: rect(26px, 50px, 50px, 27px);
+        box-shadow: inset 0px -1px 0 #111, inset -1px 0px 0 #111, inset 0px -2px 0 rgba(255,255,255, .2);
+      }
+      
+      .prec:hover{
+        background: #135;
+      }
+      
+      .prec:hover:before{
+        background:#135;
+      }
+      
+      .prec:active{
+        background: #135;
+      }
+      
+      .prec:active:before{
+        background: #135;
+      }
+    
+    </style>
+        <a href="javascript:history.go(-1)" class="prec" style="width:10%">
+          &laquo; Previous 
+        </a>
+    <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+       
+        <div class="card-body">
+
+
+
+            <div class="row">
+                <div class="col-12 grid-margin">
+                  <div class="card">
+                    <div class="card-body">
+                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      {% if cass == 0 %}
+
+                      <div class="">
+      
+                        <div class="{{class}}" role="alert">
+                          
+                          nembre de cas detecter  <strong>{{case}}</strong> nembre de case modifier  <strong>{{n}}</strong> nembre de class non modifier  <strong>{{m}}</strong>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    </div> 
+                    
+                    {% elif cas == 1 %}
+                    <div class="">
+      
+                      <div class="{{class}}" role="alert">
+                         <strong>{{message}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                  </div> 
+                  
+                  
+                    {%endif%}
+        <div class="table-wrapper">
+          
+            <div class="table-title">
+                <form method="post" action="{% url 'page_test'%}"> 
+                    {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-2"><h2>test <b> fichier </b></h2></div>
+                    <div class="col-sm-4">
+                    <div class="form-group row">
+                        <label for="inputState" class="col-sm-2 col-form-label">File</label>
+<div class="col-sm-5">
+    <br>
+<select id="inputState" class="form-control" name="test">
+  <option selected value="vide">Choose...</option>
+  {% for x in file %}  
+  <option value="{{x.id}}">             {{x.name}}</option>
+ {%endfor%}
+
+</select>
+</div></div></div>
+                    <div class="col-sm-4">
+                        <div class="form-group row">
+                            <label for="inputState" class="col-sm-2 col-form-label">rute </label>
+    <div class="col-sm-5">
+        <br>
+    <select id="inputState" class="form-control" name="test2">
+      <option selected value="vide">Choose...</option>
+      {% for x in rute %}  
+      <option value="{{x.id}}">             {{x.name}}</option>
+     {%endfor%}
+    
+               
+    </select>
+</div> </div> </div> 
+  <div class="col-sm-2">
+    <br>
+    <button type="submit" class="btn btn-gradient-success btn-icon-text">Appliquer</button>
+   </div>            
+                       
+                    </div>
+                    <div class='btn btn-info' id="displaymessage" style="display:none;width:100%;margin-top:10px;"></div>
+                </div>
+            </form>
+            </div>
+            
+  
+
+            {% if cas == 2 %}
+            <div id="overlay">
+              <div class="text-center col-lg-12 grid-margin stretch-card">
+                <div class="card col-lg-10">
+                  <div class="card-body">
+                    <h4 class="card-title">Doughnut chart</h4>
+                
+                    <canvas id="doughnutChart" style="width:90px"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+             
+            
+                  <div class="">
+      
+                    <div class="{{class}}" role="alert">
+                      nembre de cas detecter  <strong>{{case}}</strong> <br> nembre declasse modifier  <strong>{{m}}</strong> <br>nembre de class non modifier<strong>{{n}}</strong>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                </div> 
+             <script>
+             
+               function overlay() {
+                 el = document.getElementById("overlay");
+                 el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+               }
+             
+             </script>
+            {% endif %}
+
+
+</div>
+</div>
+</div>
+</div>       </div>
+</div>       </div>
+</div>  
+{% endblock %}
